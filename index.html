@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contrôle de Pression</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      width: 150px;
+      text-align: center;
+      background-color: #222;
+      color: #0f0;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #0f0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .success {
+      color: #0f0;
+    }
+
+    .error {
+      color: #f00;
+    }
+
+    .warning {
+      color: #ff0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contrôle de la Pression</h1>
+  <p>Entrez la pression minimale (en bar) nécessaire pour maintenir l’eau à l’état liquide à 330 °C :</p>
+  <input type="number" id="pressureInput" step="1" />
+  <button onclick="checkPressure()">Valider</button>
+  <div id="result"></div>
+
+  <script>
+    function checkPressure() {
+      const value = parseFloat(document.getElementById("pressureInput").value);
+      const result = document.getElementById("result");
+
+      if (isNaN(value)) {
+        result.textContent = "Veuillez entrer une valeur numérique.";
+        result.className = "error";
+        return;
+      }
+
+      if (value < 127) {
+        result.textContent = "❌ Valeur insuffisante. Risque d’ébullition critique.";
+        result.className = "error";
+      } else if (value >= 127 && value <= 128) {
+        result.textContent = "✅ Sécurité rétablie. Paramètres validés.";
+        result.className = "success";
+      } else {
+        result.textContent = "⚠️ Pression supérieure aux capacités actuelles du système. Le pressuriseur semble hors service. Choisissez une valeur réaliste mais sécurisée.";
+        result.className = "warning";
+      }
+    }
+  </script>
+</body>
+</html>
