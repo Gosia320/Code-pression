@@ -92,6 +92,11 @@
       } else if (value >= 127 && value <= 128) {
         result.textContent = "✅ Sécurité rétablie. Paramètres validés.";
         result.className = "success";
+
+         // Ajout de redirection après 2 secondes
+    setTimeout(() => {
+      window.location.href = "https://gosia320.github.io/Code-pression/enigme2.html";
+    }, 2000); // Attend 2 secondes avant de rediriger
       } else {
         result.textContent = "⚠️ Pression supérieure aux capacités actuelles du système. Le pressuriseur semble hors service. Choisissez une valeur réaliste mais sécurisée.";
         result.className = "warning";
